@@ -1,5 +1,6 @@
 const tileDisplay = document.querySelector(".tile-container");
 const keyboard = document.querySelector(".key-container");
+const messageDisplay = document.querySelector(".message-container");
 
 const wordle = "SUPER";
 
@@ -128,5 +129,11 @@ const checkRow = () => {
 };
 
 // showMessage function
+const showMessage = (message) => {
+  const messageElement = document.createElement('p')
+  messageElement.textContent = message
+  messageDisplay.append(messageElement)
+  setTimeout(() => messageDisplay.removeChild(messageElement), 2000)
+}
 
 
