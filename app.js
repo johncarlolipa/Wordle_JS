@@ -46,6 +46,7 @@ const guessRows = [
 
 let currentRow = 0;
 let currentTile = 0;
+let isGameOver = false;
 
 //create div guessrow and also guessrow-tile div
 guessRows.forEach((guessRow, guessRowIndex) => {
@@ -120,20 +121,30 @@ const deleteKey = () => {
 // enter key function
 const checkRow = () => {
   const guess = guessRows[currentRow].join("");
-  if (currentTile === 5) {
+  if (currentTile > 4) {
     console.log("guess is" + guess, "wordle is" + wordle);
     if (wordle == guess) {
-      showMessage('Magnificent')
+      showMessage("Magnificent");
+      isGameOver = true;
+      return;
+    } else {
+      if (currentRow >= 4) {
+        isGameOver = false;
+        showMessage("Game Over!");
+        return;
+      }
+      if (currentRow < 5) {
+        currentRow++;
+        currentTile = 0;
+      }
     }
   }
 };
 
 // showMessage function
 const showMessage = (message) => {
-  const messageElement = document.createElement('p')
-  messageElement.textContent = message
-  messageDisplay.append(messageElement)
-  setTimeout(() => messageDisplay.removeChild(messageElement), 2000)
-}
-
-
+  const messageElement = document.createElement("p");
+  messageElement.textContent = message;
+  messageDisplay.append(messageElement);
+  setTimeout(() => messageDisplay.removeChild(messageElement), 2000);
+};
